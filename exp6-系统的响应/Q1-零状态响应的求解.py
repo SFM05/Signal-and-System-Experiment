@@ -1,3 +1,6 @@
+r'''
+系统传递函数形式为\( H(p) = \frac{p+3}{p^2+2p+1} \)，激励为\( e(t) = e^{-2t}H(t) \)。要求先用现有函数求零状态响应，再用卷积积分运算求零状态响应。 
+'''
 from scipy import signal
 import sympy
 import numpy as np

@@ -1,3 +1,8 @@
+r'''
+已知下列传递函数，请分别画出其直角坐标系下的幅频曲线和相频曲线
+(1) \( H(s) = \frac{2s}{s^2 + \sqrt{2}s + 1} \)
+(2) 不调用函数，\( H(z) = \frac{(1 + z^{-1})^2}{1 + 0.61z^{-2}} \)
+'''
 from scipy import signal
 import numpy as np
 import matplotlib.pyplot as plt

@@ -1,3 +1,9 @@
+r'''
+描述下列系统，并求出极零点。
+(1) \( r' + r = e \)
+(2) \( r' = 10e' + 10e \)
+(3) \( r'' - 5r' = 10e \)
+'''
 from scipy import signal
 import matplotlib.pyplot as plt
 from matplotlib.axes import Axes

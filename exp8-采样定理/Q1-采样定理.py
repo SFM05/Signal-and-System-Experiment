@@ -1,3 +1,11 @@
+r'''
+已知信号\( \mathrm{Sa}(10πt) \)，通过不同时间间隔\(T_s\)取样，画出频谱，并分析取样率和信号频率关系。
+要求： 
+（1）以\(T_s = 0.5\)取样，画幅度频谱 
+（2）以\(T_s = 0.2\)取样，画幅度频谱 
+（3）以\(T_s = 0.01\)取样，画幅度频谱 
+（4）总结结果，讨论取样率和信号频率关系 
+'''
 import sympy as sp
 import numpy as np
 import matplotlib.pyplot as plt
