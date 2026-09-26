@@ -12,14 +12,14 @@ cd Signal-and-System-Experiment
 Windows:
 ```bash
 python -m venv .venv
-venv/Scripts/activate
+.venv/Scripts/activate
 pip install -r requirements.txt
 ```
 
 Linux/Mac OS:
 ```bash
 python -m venv .venv
-source venv/Scripts/activate
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
 3. 运行代码
