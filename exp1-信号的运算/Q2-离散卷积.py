@@ -33,27 +33,25 @@ result = conv(x1, x2)
 print(result)
 
 ax: list[Axes]
-_, ax = plt.subplots(3, 1, layout='constrained')
+_, ax = plt.subplots(3, 1, figsize=(8, 8))
 
-ax[0].stem(x1, basefmt=" ").markerline.set_markerfacecolor('w')
-ax[0].axhline(0, color='k', lw=0.6)
-ax[0].set_xlabel("t")
-ax[0].set_ylabel("y")
-ax[0].set_xlim([-4.5, 3.5])
+container = ax[0].stem(x1, basefmt=" ")
+container.markerline.set_markerfacecolor('w')
 ax[0].set_title(r"$x_1$")
 
-ax[1].stem(np.arange(-len(x2)+1, 1), list(reversed(x2)),
-           basefmt=" ").markerline.set_markerfacecolor('w')
-ax[1].axhline(0, color='k', lw=0.6)
-ax[1].set_xlabel("t")
-ax[1].set_ylabel("y")
-ax[1].set_xlim([-4.5, 3.5])
+container = ax[1].stem(np.arange(-len(x2)+1, 1), list(reversed(x2)),
+                       basefmt=" ")
+container.markerline.set_markerfacecolor('w')
 ax[1].set_title(r"$x_2$")
 
-ax[2].stem(result, basefmt=" ").markerline.set_markerfacecolor('w')
-ax[2].axhline(0, color='k', lw=0.6)
-ax[2].set_xlabel("t")
-ax[2].set_ylabel("y")
+container = ax[2].stem(result, basefmt=" ")
+container.markerline.set_markerfacecolor('w')
 ax[2].set_title(r"$x_1 * x_2$")
+
+for axs in ax:
+    axs.axhline(0, color='k', lw=0.6)
+    axs.set_xlabel("t")
+    axs.set_ylabel("y")
+    axs.set_xlim([-4.5, 7.5])
 
 plt.show()

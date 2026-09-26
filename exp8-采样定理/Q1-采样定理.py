@@ -16,7 +16,7 @@ matplotlib.rcParams.update({"lines.linewidth": 1,
                             "figure.constrained_layout.use": True})
 
 ax: list[list[Axes]]
-fig, ax = plt.subplots(2, 2)
+fig, ax = plt.subplots(2, 2, figsize=(10, 6))
 
 t_sym = sp.symbols("t", real=True)
 freq_sym = sp.symbols("f", real=True)
@@ -26,13 +26,11 @@ f_sym = sp.sinc(10*sp.pi * t_sym)
 
 spec_sym = sp.fourier_transform(f_sym, t_sym, freq_sym)
 spec_sym = sp.simplify(spec_sym)
-print(spec_sym)
 
 F = sp.lambdify(freq_sym, spec_sym, "numpy")
 freq = np.linspace(-10, 10, 1000)
 ax[0][0].plot(freq, np.abs(F(freq)))
-ax[0][0].set_ylim([-0.1, 0.6])
-ax[0][0].set_xlim([-10, 10])
+ax[0][0].set_title("Full Spectrum")
 
 
 Ts = 0.5
@@ -46,8 +44,7 @@ freq = np.fft.fftfreq(N, Ts)
 spec1 = np.fft.fftshift(spec1)
 freq = np.fft.fftshift(freq)
 ax[0][1].plot(freq, np.abs(spec1))
-ax[0][1].set_ylim([-0.1, 0.6])
-ax[0][1].set_xlim([-10, 10])
+ax[0][1].set_title("Spectrum when $T_s=0.5$s")
 
 
 Ts = 0.2
@@ -61,8 +58,7 @@ freq = np.fft.fftfreq(N, Ts)
 spec2 = np.fft.fftshift(spec2)
 freq = np.fft.fftshift(freq)
 ax[1][0].plot(freq, np.abs(spec2))
-ax[1][0].set_ylim([-0.1, 0.6])
-ax[1][0].set_xlim([-10, 10])
+ax[1][0].set_title("Spectrum when $T_s=0.2$s")
 
 
 Ts = 0.01
@@ -76,8 +72,14 @@ freq = np.fft.fftfreq(N, Ts)
 spec3 = np.fft.fftshift(spec3)
 freq = np.fft.fftshift(freq)
 ax[1][1].plot(freq, np.abs(spec3))
-ax[1][1].set_ylim([-0.1, 0.6])
-ax[1][1].set_xlim([-10, 10])
+ax[1][1].set_title("Spectrum when $T_s=0.01$s")
 
+
+axs: Axes
+for axs in ax.flatten():
+    axs.set_ylim([-0.1, 0.6])
+    axs.set_xlim([-10, 10])
+    axs.set_xlabel("f/Hz")
+    axs.set_ylabel("Amplitude")
 
 plt.show()

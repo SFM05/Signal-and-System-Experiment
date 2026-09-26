@@ -12,8 +12,8 @@ import matplotlib
 matplotlib.rcParams.update({"lines.linewidth": 1,
                             "figure.constrained_layout.use": True})
 
-ax: Axes
-fig, ax = plt.subplots(1, 3)
+ax: list[Axes]
+fig, ax = plt.subplots(1, 3, figsize=(12, 4))
 
 b = [1]
 a = [1, 1]
@@ -33,11 +33,14 @@ z, p, k = signal.tf2zpk(b, a)
 ax[2].plot(z.real, z.imag, 'o', label='zeros')
 ax[2].plot(p.real, p.imag, 'x', label='poles')
 
-for axis in ax:
-    axis.axhline(0, color='k', lw=0.5)
-    axis.axvline(0, color='k', lw=0.5)
-    # axis.grid(True)
-    axis.legend()
-    axis.axis('equal')
+for axs in ax:
+    axs.axhline(0, color='k', lw=0.5)
+    axs.axvline(0, color='k', lw=0.5)
+    axs.legend()
+    axs.set_xlabel("Re")
+    axs.set_ylabel("Im")
+    axs.axis('square')
+    axs.set_xlim([-6, 6])
+    axs.set_ylim([-6, 6])
 
 plt.show()

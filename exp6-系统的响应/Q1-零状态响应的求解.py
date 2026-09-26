@@ -21,20 +21,19 @@ def conv_sym(f, g, t: sympy.Symbol):
 b = [1, 3]
 a = [1, 2, 1]
 sys = signal.TransferFunction(b, a)
-t = np.linspace(0, 10, 1000)
+dt = 1e-2
+t = np.arange(0, 10, dt)
 e = np.exp(-2*t)
-t, respond, _ = signal.lsim(sys, e, t)
+_, response, _ = signal.lsim(sys, e, t)
 
-plt.plot(t, respond)
-plt.show(block=False)
-plt.pause(2e-2)
+plt.plot(t, response, label="System method")
 
-s = sympy.symbols("s")
-t, tau = sympy.symbols("t tau", real=True)
-H = (s+3)/(s**2+2*s+1)
-h = sympy.inverse_laplace_transform(H, s, t)
-e = sympy.exp(-2*t)*sympy.Heaviside(t)
+_, h = signal.impulse(sys, T=t)
+# plt.plot(t, h, label="h")
+response = np.convolve(e, h)*dt
+plt.plot(t, response[:len(t)], label="Conv")
 
-r = sympy.integrate(h.subs(t, tau) * e.subs(t, t-tau), (tau, 0, t))
-r = sympy.simplify(r)
-sympy.plot(r, (t, 0, 10))
+plt.legend()
+plt.xlabel("t/s")
+plt.ylabel("r")
+plt.show()
